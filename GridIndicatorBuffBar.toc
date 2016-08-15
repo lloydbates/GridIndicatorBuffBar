@@ -1,0 +1,7 @@
+## Interface: 70000
+## Title: GridIndicatorBuffBar
+## Notes: A Grid indicator to display the duration of a buff
+## Author: LloydBates
+## Dependencies: Grid
+## Version: 1.0
+GridIndicatorBuffBar.lua
