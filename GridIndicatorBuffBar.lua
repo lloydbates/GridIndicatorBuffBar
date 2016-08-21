@@ -1,69 +1,16 @@
 -------------------------------------------------------------------------------
 -- Addon references passed by Blizzard
 -------------------------------------------------------------------------------
-local _, GridIndicatorBuffBar = ...
+local GridIndicatorBuffBarName, GridIndicatorBuffBar = ...
 
 -------------------------------------------------------------------------------
 -- References and local upvalues
 -------------------------------------------------------------------------------
+local Grid = Grid
 local GridFrame = Grid:GetModule("GridFrame")
 local L = Grid.L
 
 local Media = LibStub("LibSharedMedia-3.0")
-
--------------------------------------------------------------------------------
--- Configuration
--------------------------------------------------------------------------------
-
--- Height of the buff bar 
-local barHeight = 4
-
--- Alpha value of the buff bar
---  0 = fully transparent
---  1 = no transparency
-local barAlpha = 1
-
--- The background of the buff bar is dimmed
---  0 = no color
---  1 = full color
-local barBackgroundDimmed = .3
-
--- Alpha value of the background of the buff bar
---  0 = fully transparent
---  1 = no transparency
-local barBackgroundAlpha = .75
-
---[[
-GridFrame.options.args["buffBar"] = {
-  name = L["Buff Bar"],
-  type = "group",
-  args = {
-    barHeight = {
-      name = L["Height"],
-      desc = L["Height of the buff bar"],
-      type = "range",
-      get = function() end,
-      set = function(info, value) end,
-    }    
-  }
-}
-GridIndicatorBuffBar = GridFrame:NewModule("GridIndicatorBuffBar", GridIndicatorBuffBar)
-
-function GridIndicatorBuffBar:Initialize()
-  self.db = Grid.db:RegisterNamespace("GridIndicatorBuffBar", {
-    profile = {
-      bar = {
-        Height = 4,
-        Alpha = 1.0
-      },
-      background = {
-        Dimmed = 0.3,
-        Alpha = 0.75        
-      }
-    }
-  })
-end
-]]--
 
 -------------------------------------------------------------------------------
 -- Buff Bar indicator
@@ -91,11 +38,12 @@ end
 
 buffBarReset = function(self)
   local profile = GridFrame.db.profile
+  local options = GridIndicatorBuffBar.db.profile 
   local texture = Media:Fetch("statusbar", profile.texture) or "Interface\\Addons\\Grid\\gradient32x32"
   local offset = profile.borderSize + 1
   
   self:SetPoint("BOTTOMLEFT", offset, offset)
-  self:SetPoint("TOPRIGHT", -offset, -profile.frameHeight + barHeight + offset) 
+  self:SetPoint("TOPRIGHT", -offset, -profile.frameHeight + options.barHeight + offset) 
   self:SetOrientation("HORIZONTAL")
 
   local r, g, b, a = self:GetStatusBarColor()
@@ -121,13 +69,14 @@ buffBarSetStatus = function(self, color, text, value, maxValue, texture, texCoor
     position = duration 
   end
   
+  local options = GridIndicatorBuffBar.db.profile
   local maximum = duration
   
   self:SetMinMaxValues(0, maximum)
   self:SetValue(position)
   
-  self:SetStatusBarColor(color.r, color.g, color.b, barAlpha)
-  self.background:SetVertexColor(color.r * barBackgroundDimmed, color.g * barBackgroundDimmed, color.b * barBackgroundDimmed, barBackgroundAlpha)
+  self:SetStatusBarColor(color.r, color.g, color.b, options.barAlpha)
+  self.background:SetVertexColor(color.r * options.barBackgroundDimmed, color.g * options.barBackgroundDimmed, color.b * options.barBackgroundDimmed, options.barBackgroundAlpha)
 end
 
 buffBarClearStatus = function(self)
