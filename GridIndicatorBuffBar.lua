@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------
 -- Addon references passed by Blizzard
 -------------------------------------------------------------------------------
-local GridIndicatorBuffBarName, GridIndicatorBuffBar = ...
+local _, GridIndicatorBuffBar = ...
 
 -------------------------------------------------------------------------------
 -- References and local upvalues
@@ -38,7 +38,7 @@ end
 
 buffBarReset = function(self)
   local profile = GridFrame.db.profile
-  local options = GridIndicatorBuffBar.db.profile 
+  local options = GridIndicatorBuffBar.db.profile
   local texture = Media:Fetch("statusbar", profile.texture) or "Interface\\Addons\\Grid\\gradient32x32"
   local offset = profile.borderSize + 1
   
@@ -68,7 +68,7 @@ buffBarSetStatus = function(self, color, text, value, maxValue, texture, texCoor
   if position > duration then 
     position = duration 
   end
-  
+
   local options = GridIndicatorBuffBar.db.profile
   local maximum = duration
   
