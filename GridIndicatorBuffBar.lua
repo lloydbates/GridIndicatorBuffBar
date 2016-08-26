@@ -63,7 +63,7 @@ buffBarSetStatus = function(self, color, text, value, maxValue, texture, texCoor
     buffBarClearStatus(self)
     return
   end
-  
+    
   position = position + 1
   if position > duration then 
     position = duration 
@@ -92,3 +92,12 @@ GridFrame:RegisterIndicator("buffBar", L["Buff Bar"],
   buffBarReset,
   buffBarSetStatus,
   buffBarClearStatus) 
+
+-------------------------------------------------------------------------------
+-- Called when any value was changed in the options dialog
+-------------------------------------------------------------------------------
+function GridIndicatorBuffBar:OnConfigChanged(key, value)
+  if key == "barHeight" then
+    GridFrame:UpdateAllFrames()
+  end
+end  

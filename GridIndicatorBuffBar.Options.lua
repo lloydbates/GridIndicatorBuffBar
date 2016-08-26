@@ -39,6 +39,7 @@ GridFrame.options.args["buffBar"] = {
   set = function (info, value)
     local k = info[#info]
     GridIndicatorBuffBar.db.profile[k] = value
+    GridIndicatorBuffBar:OnConfigChanged(k, value)
   end,
   args = {
     barHeight = {
