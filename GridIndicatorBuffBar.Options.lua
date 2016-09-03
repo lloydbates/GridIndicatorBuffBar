@@ -66,5 +66,16 @@ GridFrame.options.args["buffBar"] = {
       order = 4, width = "double",
       type = "range", min = 0, max = 1, step = 0.01, bigStep = 0.1,
     },
+    barConfigNoteHeader = {
+      name = L["Configuration note"],
+      fontSize = "large"
+      order = 5, width = "double",
+      type = "description",
+    },
+    barConfigNodeBody = {
+      name = L["You have to enable \"Advanced options\" for buff and debuff status in Grid.\nFor the status you want to track, you have to switch Text to \"Time left\"."],
+      order = 6, width = "fill",
+      type = description,
+    }
   },
 }

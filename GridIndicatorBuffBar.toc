@@ -3,6 +3,6 @@
 ## Notes: A Grid indicator to display the duration of a buff
 ## Author: LloydBates
 ## Dependencies: Grid
-## Version: 1.1
+## Version: 1.2
 GridIndicatorBuffBar.Options.lua
 GridIndicatorBuffBar.lua
